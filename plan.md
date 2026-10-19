@@ -158,7 +158,7 @@ For each uploaded file `example.pdf` inside folder `/reports/`:
 ### Phase 2: Chunking, AES-256-GCM Encryption & Manifest Engine
 **Objective**: Build the core Cloud Controller data pipeline ensuring file segmentation, authenticated symmetric encryption, and byte-for-byte fidelity upon retrieval.
 
-- [ ] **2.1 AES-256-GCM Encryption Engine (`services/encryption_service.py`)**:
+- [x] **2.1 AES-256-GCM Encryption Engine (`services/encryption_service.py`)**:
   - Initialize 256-bit AES master key from configuration (derived or hex-decoded).
   - `encrypt_chunk(chunk_bytes)`:
     - Generate unique 12-byte (96-bit) cryptographically secure random nonce (`os.urandom(12)`).
@@ -168,12 +168,12 @@ For each uploaded file `example.pdf` inside folder `/reports/`:
     - Verify authentication tag against ciphertext using the nonce.
     - Decrypt and return original chunk bytes.
     - Raise `DecryptionError` if data has been tampered with or corrupted.
-- [ ] **2.2 Chunking Service (`services/chunk_service.py`)**:
+- [x] **2.2 Chunking Service (`services/chunk_service.py`)**:
   - `split_into_chunks(stream_or_bytes, chunk_size=1048576)`:
     - Generator yielding `(chunk_index, chunk_bytes)`.
   - `combine_chunks(chunks_generator_or_list)`:
     - Sequentially assemble chunks back into a contiguous byte stream.
-- [ ] **2.3 Manifest & File Coordinator (`services/file_service.py`)**:
+- [x] **2.3 Manifest & File Coordinator (`services/file_service.py`)**:
   - `upload_file(folder_path, filename, stream, content_length, username)`:
     - Create dedicated folder in HDFS: `/cloud-storage/shared/<folder_path>/.file_<filename>_<uuid>/`.
     - Split incoming stream into 1 MiB chunks.
@@ -187,7 +187,7 @@ For each uploaded file `example.pdf` inside folder `/reports/`:
     - Read each encrypted chunk from HDFS in sequence.
     - Decrypt and verify each chunk with `encryption_service`.
     - Yield decrypted chunks as a generator for memory-efficient streaming to client.
-- [ ] **2.4 Testing & Roundtrip Integrity**:
+- [x] **2.4 Testing & Roundtrip Integrity**:
   - Write `tests/test_encryption.py` and `tests/test_chunking.py`.
   - Test binary files (images, PDFs) and verify SHA-256 hash matches original before and after download.
   - Test chunk corruption detection (simulate tampered byte in chunk, assert decryption failure).
