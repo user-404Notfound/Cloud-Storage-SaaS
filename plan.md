@@ -224,15 +224,15 @@ For each uploaded file `example.pdf` inside folder `/reports/`:
 ### Phase 4: Google Drive-Style React Frontend & LAN Deployment Guide
 **Objective**: Build a clean, light-themed Google Drive-like web interface and prepare deployment scripts for the college laboratory LAN.
 
-- [ ] **4.1 React Scaffolding & Theme**:
+- [x] **4.1 React Scaffolding & Theme**:
   - Initialize React with Vite in `frontend/`.
-  - Style with modern CSS / Tailwind CSS for a Google Drive-inspired light layout (clean cards, light gray borders, blue primary accents).
-- [ ] **4.2 User Interface Components**:
-  - **Login Page**: Clean card layout, lab credentials indicator, error handling.
+  - Style with modern CSS for an authentic Google Drive light layout (no AI slop gradients, clean cards, light gray borders, blue primary accents).
+- [x] **4.2 User Interface Components**:
+  - **Login Page**: Clean card layout, lab credentials indicator with 1-click login, error handling.
   - **Dashboard Layout**:
-    - Top header: Search bar, active username badge, logout button.
-    - Left sidebar: "Storage (Shared LAN)", "New" button (+ Upload File, + New Folder), drive capacity/status.
-    - Breadcrumb navigation: Clickable path components (`Shared / Documents / Lab3`).
+    - Top header: Search bar, active username badge, logout button, HDFS status pill.
+    - Left sidebar: "+ New" button (+ Upload File, + New Folder), drive capacity/status.
+    - Breadcrumb navigation: Clickable path components (`Shared Drive / Documents / Lab3`).
   - **File Explorer**:
     - Toggle between Table View (Name, Size, Modified Date, Actions) and Grid View (Card icons).
     - Double-click folder navigation.
@@ -240,10 +240,10 @@ For each uploaded file `example.pdf` inside folder `/reports/`:
     - Delete confirmation dialog explicitly warning: *"This is a shared cloud storage. Deleting this file removes it for all laboratory users."*
   - **Upload Progress Modal**:
     - Visual progress bar showing chunk upload status.
-- [ ] **4.3 API Client Integration**:
-  - Configure `axios` or `fetch` instance with `credentials: 'include'` for session cookie support.
-  - Error toast notifications for network or decryption errors.
-- [ ] **4.4 Multi-PC LAN Deployment Setup**:
+- [x] **4.3 API Client Integration**:
+  - Configure `api.js` client with `credentials: 'include'` for session cookie support.
+  - Toast notifications for operations and errors.
+- [x] **4.4 Multi-PC LAN Deployment Setup**:
   - Create `scripts/start_master.sh` to launch Hadoop Master (NameNode + DataNode), Flask backend, and serve frontend build.
   - Create `scripts/start_datanode.sh` for worker Ubuntu PCs.
   - Write `LAN_DEPLOYMENT.md` providing step-by-step instructions:
@@ -258,12 +258,12 @@ For each uploaded file `example.pdf` inside folder `/reports/`:
 
 | Requirement | Verification Method | Status |
 | :--- | :--- | :--- |
-| **No Database** | Inspect code to verify zero SQL/NoSQL dependencies; only HDFS & `credentials.json` | Pending |
-| **Shared Storage** | Verify all logged-in accounts see and share `/cloud-storage/shared/` | Pending |
-| **Real WebHDFS** | Verify HTTP communication with NameNode (9870) and DataNodes (9864) | Pending |
-| **1 MiB Chunking** | Verify files > 1 MiB are split into sequential chunk files in HDFS | Pending |
-| **AES-256-GCM** | Verify encrypted chunks cannot be read directly from HDFS; verify unique nonces & tag checks | Pending |
-| **Data Integrity** | Compare SHA-256 hash of downloaded file against original upload | Pending |
-| **Google Drive UI** | Test responsive React interface with breadcrumbs, upload progress, and grid/table views | Pending |
-| **LAN Portability** | Master IP configurable via `.env` without hardcoded localhost references | Pending |
+| **No Database** | Inspect code to verify zero SQL/NoSQL dependencies; only HDFS & `credentials.json` | **Verified** |
+| **Shared Storage** | Verify all logged-in accounts see and share `/cloud-storage/shared/` | **Verified** |
+| **Real WebHDFS** | Verify HTTP communication with NameNode (9870) and DataNodes (9864) | **Verified** |
+| **1 MiB Chunking** | Verify files > 1 MiB are split into sequential chunk files in HDFS | **Verified** |
+| **AES-256-GCM** | Verify encrypted chunks cannot be read directly from HDFS; verify unique nonces & tag checks | **Verified** |
+| **Data Integrity** | Compare SHA-256 hash of downloaded file against original upload | **Verified** |
+| **Google Drive UI** | Test responsive React interface with breadcrumbs, upload progress, and grid/table views | **Verified** |
+| **LAN Portability** | Master IP configurable via `.env` without hardcoded localhost references | **Verified** |
 
