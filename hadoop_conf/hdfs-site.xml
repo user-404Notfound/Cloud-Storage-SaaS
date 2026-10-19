@@ -60,4 +60,8 @@
         <name>dfs.datanode.use.datanode.hostname</name>
         <value>false</value>
     </property>
+    <property>
+        <name>dfs.namenode.safemode.extension</name>
+        <value>0</value>
+    </property>
 </configuration> 

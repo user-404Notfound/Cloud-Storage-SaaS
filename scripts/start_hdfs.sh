@@ -34,6 +34,7 @@ echo "Waiting for WebHDFS to respond..."
 for i in {1..10}; do
     if curl -s -m 2 "http://127.0.0.1:9870/webhdfs/v1/?op=LISTSTATUS" > /dev/null 2>&1; then
         echo "[SUCCESS] HDFS is up and running! WebHDFS: http://127.0.0.1:9870/webhdfs/v1"
+        hdfs dfsadmin -safemode leave 2>/dev/null || true
         exit 0
     fi
     sleep 1

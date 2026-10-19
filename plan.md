@@ -197,26 +197,26 @@ For each uploaded file `example.pdf` inside folder `/reports/`:
 ### Phase 3: Flask REST APIs & Shared Authentication
 **Objective**: Expose robust REST API endpoints with server-side session authentication guarding the shared storage pool.
 
-- [ ] **3.1 Authentication Controller (`routes/auth.py`)**:
+- [x] **3.1 Authentication Controller (`routes/auth.py`)**:
   - Store predefined lab credentials in `credentials.json` with hashed passwords (`werkzeug.security.generate_password_hash`).
   - `POST /api/auth/login`: Validate credentials and set secure HTTP session cookie.
   - `POST /api/auth/logout`: Invalidate session.
   - `GET /api/auth/me`: Check current session status and return username.
   - Create `@login_required` decorator to protect all file/folder endpoints.
-- [ ] **3.2 Directory & Navigation Endpoints (`routes/folders.py`)**:
+- [x] **3.2 Directory & Navigation Endpoints (`routes/folders.py`)**:
   - `GET /api/folders/list?path=<dir>`:
     - Traverse HDFS directory.
     - For subdirectories representing files (`.file_*`), read manifest to return file details (name, size, upload date, owner).
     - Return list of folders and files formatted for the frontend.
   - `POST /api/folders/create`:
     - Create a new directory in HDFS under current path.
-- [ ] **3.3 File Operation Endpoints (`routes/files.py`)**:
+- [x] **3.3 File Operation Endpoints (`routes/files.py`)**:
   - `POST /api/files/upload`: Accept `multipart/form-data` with destination path and stream file through `file_service.upload_file`.
   - `GET /api/files/download`: Accept file path, stream decrypted chunks via `flask.Response(stream_with_context(...))` with `Content-Disposition`.
   - `DELETE /api/files/delete`: Delete file or folder and all underlying chunks/manifests from HDFS.
   - `POST /api/files/rename`: Rename folder or update file manifest in HDFS.
   - `GET /api/files/search?q=<query>`: Recursively list HDFS shared storage and match filenames against query.
-- [ ] **3.4 API Integration Testing**:
+- [x] **3.4 API Integration Testing**:
   - Create integration test suite verifying end-to-end HTTP calls: Login -> Create Folder -> Upload File -> List Directory -> Download File -> Verify SHA-256 -> Delete File.
 
 ---
