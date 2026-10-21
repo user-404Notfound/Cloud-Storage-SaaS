@@ -119,6 +119,8 @@ class WebHDFSService:
             if not datanode_url:
                 raise WebHDFSError(f"Missing DataNode redirect Location header for {hdfs_path}")
 
+            logger.info(f"WebHDFS redirecting chunk write to DataNode: {datanode_url}")
+
             resp2 = requests.put(
                 datanode_url,
                 data=data,
